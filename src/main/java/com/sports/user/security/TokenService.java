@@ -1,4 +1,4 @@
-package com.sports.user.config.security;
+package com.sports.user.security;
 
 import com.sports.user.entity.User;
 import io.jsonwebtoken.Claims;
@@ -33,6 +33,7 @@ public class TokenService {
 
     public String getUserId(String token) {
         Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+        System.out.println("Get user iD: "+ claims.getSubject().toString());
         return claims.getSubject().toString();
     }
 

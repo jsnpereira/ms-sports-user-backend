@@ -1,4 +1,4 @@
-package com.sports.user.config.security;
+package com.sports.user.security;
 
 import com.sports.user.entity.User;
 import com.sports.user.repository.UserRepository;
@@ -42,9 +42,13 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
 
     private String restoreToken(HttpServletRequest httpServletRequest) {
         String token = httpServletRequest.getHeader("Authorization");
-        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+        if (isValidToken(token)) {
             return null;
         }
         return token.substring(7, token.length());
     }
+
+    private boolean isValidToken(String token) {
+        return  token == null || token.isEmpty() || !token.startsWith("Bearer ");
+    };
 }

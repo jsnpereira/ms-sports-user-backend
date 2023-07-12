@@ -1,4 +1,4 @@
-package com.sports.user.config.security;
+package com.sports.user.security;
 
 
 import com.sports.user.entity.User;

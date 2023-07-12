@@ -24,41 +24,6 @@ public class JacksonConfig {
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.registerModule(new JSR310Module());
-//        mapper.registerModule(registerStatusModuleMapper());
         return mapper;
     }
-
-
-
-//    public SimpleModule registerStatusModuleMapper() {
-//        SimpleModule simpleModule = new SimpleModule("JSONEventTypeModule", PackageVersion.VERSION);
-//        simpleModule.addDeserializer(RegisterStatus.class, new RegisterStatusDeserialize());
-//        simpleModule.addSerializer(RegisterStatus.class, new RegisterStatusSerializer());
-//        return simpleModule;
-//    }
-//
-//    class RegisterStatusSerializer extends StdSerializer<RegisterStatus> {
-//
-//        protected RegisterStatusSerializer() {
-//            super(RegisterStatus.class);
-//        }
-//
-//        @Override
-//        public void serialize(RegisterStatus registerStatus, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-//            jsonGenerator.writeString(registerStatus.name());
-//        }
-//    }
-//
-//    class RegisterStatusDeserialize extends StdDeserializer<RegisterStatus> {
-//        public RegisterStatusDeserialize() {
-//            super(RegisterStatus.class);
-//        }
-//
-//        @Override
-//        public RegisterStatus deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException{
-//
-//            String value = jsonParser.getText();
-//            return RegisterStatus.valueOf(value);
-//        }
-//    }
 }

@@ -1,6 +1,9 @@
 package com.sports.user.config.security;
 
 import com.sports.user.repository.UserRepository;
+import com.sports.user.security.AuthenticationService;
+import com.sports.user.security.AuthenticationTokenFilter;
+import com.sports.user.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,12 +44,17 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/auth").permitAll()
+                .antMatchers(HttpMethod.POST,"/oauth/token").permitAll()
                 .antMatchers(HttpMethod.GET,"/actuator/**").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/v1/event/*").hasRole("MODERATOR")
+                //.antMatchers(HttpMethod.DELETE,"/v1/event/*").hasRole("MODERATOR")
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
