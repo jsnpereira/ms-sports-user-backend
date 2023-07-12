@@ -1,6 +1,8 @@
 package com.sports.user.config.security;
 
 import com.sports.user.repository.UserRepository;
+import com.sports.user.security.AuthenticationService;
+import com.sports.user.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +33,11 @@ public class DevSecurityConfigurations extends WebSecurityConfigurerAdapter {
     @Bean
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override

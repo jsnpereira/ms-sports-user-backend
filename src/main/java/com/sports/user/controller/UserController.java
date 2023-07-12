@@ -1,6 +1,7 @@
 package com.sports.user.controller;
 
-import com.sports.user.dto.request.UserDTO;
+import com.sports.user.dto.request.UserNewDTO;
+import com.sports.user.dto.request.UserResponseDTO;
 import com.sports.user.exception.UserIdNotFoundException;
 import com.sports.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,16 @@ public class UserController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDTO getUserById(@PathVariable(name = "id") String userId) throws UserIdNotFoundException {
-        UserDTO user;
+    public UserResponseDTO getUserById(@PathVariable(name = "id") String userId) throws UserIdNotFoundException {
+        UserResponseDTO user;
         user = userService.getUserById(userId);
         return user;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserResponseDTO postUser(@RequestBody UserNewDTO userDTO) {
+        return userService.saveUser(userDTO);
     }
 
 }
